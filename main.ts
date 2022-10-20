@@ -8,6 +8,7 @@ let AGUS = game.createSprite(randint(1, 4), randint(0, 4))
 ANDREA.set(LedSpriteProperty.Brightness, 100)
 ARNOL.set(LedSpriteProperty.Brightness, 100)
 AGUS.set(LedSpriteProperty.Brightness, 100)
+game.setScore(0)
 basic.forever(function () {
     while (input.buttonIsPressed(Button.A)) {
         JAVIER.change(LedSpriteProperty.X, -1)
@@ -26,32 +27,36 @@ basic.forever(function () {
         basic.pause(100)
     }
     if (JAVIER.isTouching(ANDREA)) {
-        music.startMelody(music.builtInMelody(Melodies.Entertainer), MelodyOptions.OnceInBackground)
         ANDREA.delete()
+        music.startMelody(music.builtInMelody(Melodies.Entertainer), MelodyOptions.Once)
         for (let index = 0; index < 3; index++) {
             basic.showIcon(IconNames.Yes)
-            basic.clearScreen()
         }
+        game.addScore(1)
     }
     if (JAVIER.isTouching(ARNOL)) {
-        music.startMelody(music.builtInMelody(Melodies.Entertainer), MelodyOptions.OnceInBackground)
         ARNOL.delete()
+        music.startMelody(music.builtInMelody(Melodies.Entertainer), MelodyOptions.Once)
         for (let index = 0; index < 3; index++) {
             basic.showIcon(IconNames.Yes)
-            basic.clearScreen()
         }
+        game.addScore(1)
     }
     if (JAVIER.isTouching(AGUS)) {
-        music.startMelody(music.builtInMelody(Melodies.Entertainer), MelodyOptions.OnceInBackground)
         AGUS.delete()
+        music.startMelody(music.builtInMelody(Melodies.Entertainer), MelodyOptions.Once)
         for (let index = 0; index < 3; index++) {
             basic.showIcon(IconNames.Yes)
-            basic.clearScreen()
         }
+        game.addScore(1)
+    }
+    if (game.score() == 3) {
+        basic.showString("YOU WIN")
+        music.startMelody(music.builtInMelody(Melodies.Entertainer), MelodyOptions.Once)
     }
 })
 loops.everyInterval(3000, function () {
-    ANDREA.change(LedSpriteProperty.X, randint(0, 4))
-    ARNOL.change(LedSpriteProperty.X, randint(0, 4))
-    AGUS.change(LedSpriteProperty.X, randint(0, 4))
+    ANDREA.change(LedSpriteProperty.Y, randint(0, 4))
+    ARNOL.change(LedSpriteProperty.Y, randint(0, 4))
+    AGUS.change(LedSpriteProperty.Y, randint(0, 4))
 })
