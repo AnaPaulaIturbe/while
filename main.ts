@@ -53,6 +53,7 @@ basic.forever(function () {
     if (game.score() == 3) {
         basic.showString("YOU WIN")
         music.startMelody(music.builtInMelody(Melodies.Entertainer), MelodyOptions.Once)
+        game.gameOver()
     }
 })
 loops.everyInterval(3000, function () {
